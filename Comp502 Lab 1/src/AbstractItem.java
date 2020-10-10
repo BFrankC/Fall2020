@@ -19,7 +19,7 @@ public abstract class AbstractItem implements Item
     @Override
     public String getDescription()
     {
-        return null;
+        return "git";
     }
 
     /**
