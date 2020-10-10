@@ -4,6 +4,9 @@
  * @author Franklin University
  * @version 2.0
  */
+
+//test comment
+
 public abstract class AbstractItem implements Item
 {
     // Instance variables
