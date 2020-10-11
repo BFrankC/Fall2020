@@ -26,7 +26,7 @@ public class Television extends AbstractItem
      */
     public int getSize()
     {
-        return 0;
+        return this.size;
     }
 
     /**
@@ -36,6 +36,7 @@ public class Television extends AbstractItem
      */
     public void setSize(int screenSize)
     {
+        this.size = screenSize;
     }
 
     /**
@@ -44,7 +45,7 @@ public class Television extends AbstractItem
      */
     public String getType()
     {
-        return null;
+        return this.type;
     }
 
     /**
@@ -54,6 +55,7 @@ public class Television extends AbstractItem
      */
     public void setType(String screenType)
     {
+        this.type = screenType;
     }
 
     /**
@@ -81,7 +83,8 @@ public class Television extends AbstractItem
      * @return the new Television
      */
     public static Television createFromString(String string) {
-        return null;
+        Television t = new Television();
+        return t;
     }
 
     @Override

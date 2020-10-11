@@ -17,6 +17,7 @@ public class ItemLookup implements Lookup
      */
     public ItemLookup(Item item)
     {
+        theItem = item;
     }
 
     /**
@@ -29,6 +30,31 @@ public class ItemLookup implements Lookup
     @Override
     public boolean matches(Item item)
     {
-        return false;
+        try
+        {
+        if (item == null && theItem == null)
+        {
+            return true;
+        }
+        // ^ is exclusive or.  it means only one is true.
+        else if (item == null ^ theItem == null)
+        {
+            return false;
+        }
+        // So, they both have a value, do they match?
+        else if (theItem.equals(item))
+        {
+            return true;
+        }
+        //No match.
+        else
+        {
+            return false;
+        }
+        }
+        catch (Exception e)
+        {
+            return false;
+        }
     }
 }

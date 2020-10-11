@@ -1,3 +1,4 @@
+
 /**
  * This class is a lookup that matches Television items whose size and type
  * match a specified item, to be passed into the constructor when creating
@@ -18,6 +19,8 @@ public class TVLookup implements Lookup
      */
     public TVLookup(int size, String type)
     {
+        tvSize = size;
+        tvType = type;
     }
 
     /**
@@ -31,6 +34,39 @@ public class TVLookup implements Lookup
     @Override
     public boolean matches(Item item)
     {
-        return false;
+        try
+        {
+        // WE DONT KNOW THAT ITEM IS A TV!
+        Television tv = (Television)item;
+        if (tv == null)
+        {
+            //PROBLEM WITH CAST!
+            return false;
+        }
+        if (tvSize == tv.getSize())
+        {
+
+            if(tv.getType() == null && tvType == null)
+            {
+                return true;
+            }
+            else if (tvType.equalsIgnoreCase(tv.getType()))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else 
+        {
+            return false;
+        }
+        }
+        catch (Exception e)
+        {
+            return false;
+        }
     }
 }

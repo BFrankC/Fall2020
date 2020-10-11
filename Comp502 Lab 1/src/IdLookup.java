@@ -17,6 +17,7 @@ public class IdLookup implements Lookup
      */
     public IdLookup(String id)
     {
+        this.lookupId = id;
     }
 
     /**
@@ -29,6 +30,31 @@ public class IdLookup implements Lookup
     @Override
     public boolean matches(Item item)
     {
-        return false;
+        try
+        {
+        if (item.getId() == null && this.lookupId == null)
+        {
+            return true;
+        }
+        // ^ is exclusive or.  it means only one is true.
+        else if (item.getId() == null ^ this.lookupId == null)
+        {
+            return false;
+        }
+        // So, they both have a value, do they match?
+        else if (this.lookupId.matches(item.getId()))
+        {
+            return true;
+        }
+        // catch any other cases.
+        else
+        {
+            return false;
+        }
+        }
+        catch (Exception e)
+        {
+            return false;
+        }
     }
 }

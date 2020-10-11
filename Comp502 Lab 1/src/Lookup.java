@@ -10,7 +10,7 @@ public interface Lookup
 {
     /**
      * Indicates whether the item meets the criterion
-     * passed into the contructor.
+     * passed into the constructor.
      * @param item the item being checked for a match.
      * @return true if the item matches, otherwise
      * false.

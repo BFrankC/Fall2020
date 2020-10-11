@@ -96,6 +96,14 @@ public class ABCRentals implements Inventory
     public List<Item> findItems(Lookup query)
     {
         ArrayList<Item> matches = new ArrayList<Item>();
+        // The worst way to do this.  
+        for(Item x: items)
+        {
+            if (query.matches(x))
+            {
+                matches.add(x);
+            }
+        }
 
         return matches;
     }

@@ -17,6 +17,7 @@ public class RentalStatusLookup implements Lookup
      */
     public RentalStatusLookup(boolean status)
     {
+        lookupStatus = status;
     }
 
     /**
@@ -29,6 +30,17 @@ public class RentalStatusLookup implements Lookup
     @Override
     public boolean matches(Item item)
     {
-        return false;
+        try
+        {
+        if (item == null)
+        {
+            return false;
+        }
+        return lookupStatus == item.isRented();
+        }
+        catch (Exception e)
+        {
+            return false;
+        }
     }
 }

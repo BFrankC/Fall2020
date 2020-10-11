@@ -13,7 +13,7 @@ public abstract class AbstractItem implements Item
     private String description;
     private double weeklyRate;
     private String id;
-    private boolean rentalStatus;
+    private boolean isRentedOut;
 
    /**
      * Return the description of the item.
@@ -22,7 +22,7 @@ public abstract class AbstractItem implements Item
     @Override
     public String getDescription()
     {
-        return "git";
+        return this.description;    //TODO: remove
     }
 
     /**
@@ -33,6 +33,7 @@ public abstract class AbstractItem implements Item
     @Override
     public void setDescription(String desc)
     {
+        this.description = desc; //TODO: remove
     }
 
    /**
@@ -42,7 +43,7 @@ public abstract class AbstractItem implements Item
     @Override
     public double getWeeklyRate()
     {
-        return 0;
+        return this.weeklyRate; //TODO: remove
     }
 
     /**
@@ -53,6 +54,7 @@ public abstract class AbstractItem implements Item
     @Override
     public void setWeeklyRate(double wklyRate)
     {
+        this.weeklyRate = wklyRate; //TODO: remove
     }
 
     /**
@@ -62,7 +64,7 @@ public abstract class AbstractItem implements Item
     @Override
     public String getId()
     {
-        return null;
+        return this.id; //TODO: remove
     }
 
     /**
@@ -73,6 +75,7 @@ public abstract class AbstractItem implements Item
     @Override
     public void setId(String idNum)
     {
+        this.id = idNum;    //TODO: remove
     }
 
     /**
@@ -84,7 +87,7 @@ public abstract class AbstractItem implements Item
     @Override
     public double calculateFee(int weeks)
     {
-        return 0;
+        return this.weeklyRate * weeks; //TODO: remove
     }
 
     /**
@@ -93,6 +96,7 @@ public abstract class AbstractItem implements Item
     @Override
     public void rented()
     {
+        this.isRentedOut = true;    //TODO: remove
     }
 
     /**
@@ -102,6 +106,7 @@ public abstract class AbstractItem implements Item
     @Override
     public void returned()
     {
+        this.isRentedOut = false;    //TODO: remove
     }
 
     /**
@@ -111,7 +116,7 @@ public abstract class AbstractItem implements Item
     @Override
     public boolean isRented()
     {
-        return false;
+        return this.isRentedOut;    //TODO: remove
     }
 
     /**
@@ -128,7 +133,7 @@ public abstract class AbstractItem implements Item
         }
 
         AbstractItem other = (AbstractItem) o;
-        return rentalStatus == other.rentalStatus &&
+        return isRentedOut == other.isRentedOut &&
                 ABCRentals.nullSafeEquals(weeklyRate, other.weeklyRate) &&
                 ABCRentals.nullSafeEquals(description, other.description) &&
                 ABCRentals.nullSafeEquals(id, other.id);

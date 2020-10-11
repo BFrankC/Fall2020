@@ -24,7 +24,7 @@ public class Furniture extends AbstractItem
      */
     public double getMonthlyRate()
     {
-        return 0;
+        return this.monthlyRate;
     }
 
     /**
@@ -34,6 +34,7 @@ public class Furniture extends AbstractItem
      */
     public void setMonthlyRate(double mnthlyRate)
     {
+        this.monthlyRate = mnthlyRate;
     }
 
     /**
@@ -50,7 +51,20 @@ public class Furniture extends AbstractItem
     @Override
     public double calculateFee(int weeks)
     {
-        return 0;
+        if (monthlyRate <=0 || weeks <= 0 || getWeeklyRate() <= 0)
+        {
+            return 0;
+        }
+        
+        if(weeks >4)
+        {
+            return monthlyRate * Math.floor(weeks/4) + getWeeklyRate()*(weeks % 4);
+        }
+        else
+        {
+            return weeks * getWeeklyRate(); 
+            
+        }
     }
 
     /**
@@ -77,7 +91,8 @@ public class Furniture extends AbstractItem
      * @return the new DVDPlayer
      */
     public static Furniture createFromString(String string) {
-        return null;
+        Furniture f = new Furniture();
+        return f;
     }
 
     @Override

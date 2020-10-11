@@ -23,11 +23,29 @@ public class DVDPlayer extends AbstractItem
      * @return the new DVDPlayer
      */
     public static DVDPlayer createFromString(String string) {
-        return null;
+        String stringArray[] = string.split(":");
+        DVDPlayer player = new DVDPlayer();
+        player.setId(stringArray[0]);
+        player.setDescription(stringArray[1]);
+        player.setWeeklyRate(Double.parseDouble(stringArray[2]));
+        if ( stringArray[3].compareTo("true") == 0 )
+        {
+            player.rented();
+        }
+        else if (stringArray[3].compareTo("false") == 0 )
+        {
+            player.returned();
+        }
+        else
+        {
+            //bad read.  We should thrown and exception / panic.
+        }
+        return player;
     }
 
     @Override
     public String saveToString() {
+        
         return null;
     }
 }
