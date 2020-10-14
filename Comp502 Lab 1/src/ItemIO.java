@@ -18,7 +18,15 @@ public class ItemIO {
      */
     public static void saveItems(String filename, List<Item> items)
             throws IOException {
-    }
+    	try(PrintWriter out = new PrintWriter (new FileWriter((filename))) {
+    		for (Item item : items) {
+    			String line = items.toFileForma();
+    			out.println(line);
+    			}
+    		}
+    	}
+   }
+    
 
     /**
      * Loads a list of items from the given file.  Each line is in the format
@@ -30,7 +38,14 @@ public class ItemIO {
      */
     public static List<Item> loadItems(String filename) throws IOException {
         List<Item> items = new ArrayList<>();
-
+        try (Scanner in = new Scanner(new FileReader (filename))) {
+        	while(in.hasNextLine()) {
+        		String line = in.nextLine();
+        		String [] tokens = line.split("~");
+        		String type = tokens[0];
+        		string data = tokens[1];
+        		items.add(new Item(type, data));
+        	}
         return items;
     }
 }
