@@ -27,7 +27,7 @@ public class DVDPlayer extends AbstractItem
         DVDPlayer player = new DVDPlayer();
         player.setId(stringArray[0]);
         player.setDescription(stringArray[1]);
-        player.setWeeklyRate(Double.parseDouble(stringArray[2]));
+        player.setWeeklyRate(stringArray[2]);
         if ( stringArray[3].compareTo("true") == 0 )
         {
             player.rented();
