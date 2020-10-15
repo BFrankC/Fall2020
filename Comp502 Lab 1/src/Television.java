@@ -83,8 +83,22 @@ public class Television extends AbstractItem
      * @return the new Television
      */
     public static Television createFromString(String string) {
-        Television t = new Television();
-        return t;
+    	        Television newTV = new Television();
+    	        String stringArray[] = string.split(":");
+    	        newTV.setId(stringArray[0]);
+    	        newTV.setDescription(stringArray[1]);
+    	        newTV.setWeeklyRate(stringArray[2]);
+    	        if ( stringArray[3].compareTo("true") == 0) {
+    	            newTV.rented();
+    	        }
+    	        else if (stringArray[3].compareTo("false") == 0) {
+    	            newTV.returned();
+    	        }
+    	        newTV.setSize(stringArray[4]);
+    	        newTV.setType(stringArray[5]);
+    	        return newTV;
+    	    }
+
     }
 
     @Override
