@@ -40,7 +40,11 @@ public class DVDPlayer extends AbstractItem
         {
             //bad read.  We should thrown and exception / panic.
         }
+        int x = 5;
+        x += 2;
+        
         return player;
+        
     }
 
     @Override
