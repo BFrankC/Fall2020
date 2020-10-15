@@ -1,6 +1,10 @@
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
+import java.nio.CharBuffer;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * The ItemIO class is used to read and write items to a text file
@@ -18,12 +22,12 @@ public class ItemIO {
      */
     public static void saveItems(String filename, List<Item> items)
             throws IOException {
-    	try(PrintWriter out = new PrintWriter (new FileWriter((filename))) {
-    		for (Item item : items) {
-    			String line = items.toFileForma();
-    			out.println(line);
-    			}
-    		}
+//    	try(PrintWriter out = new PrintWriter (new FileWriter((filename))) {
+//    		for (Item item : items) {
+//    			String line = items.toFileForma();
+//    			out.println(line);
+//    			}
+//    		}
     	}
    
     
@@ -37,16 +41,39 @@ public class ItemIO {
      * @throws IOException if the file can't be opened
      */
     public static List<Item> loadItems(String filename) throws IOException {
-        List<Item> items = new ArrayList<>();
-        try (Scanner in = new Scanner(new FileReader (filename))) {
-        	while(in.hasNextLine()) {
-        		String line = in.nextLine();
-        		String [] tokens = line.split("~");
-        		String type = tokens[0];
-        		string data = tokens[1];
-        		items.add(new Item(type, data));
-        	}
+        ArrayList<Item> items = new ArrayList<>();
+        try(Scanner input = new Scanner(new File(filename)))
+        {
+            while(input.hasNext())
+            {
+                input.useDelimiter("~");
+                String type = input.next();
+                input.skip("~");
+                
+                switch(type)
+                {
+                case "DVDPlayer":
+                    items.add(DVDPlayer.createFromString(input.nextLine()));
+                    break;
+                case "Furniture":
+                    items.add(Furniture.createFromString(input.nextLine()));
+                    break;
+                case "Television":
+                    items.add(Television.createFromString(input.nextLine()));
+                    break;
+                    default:
+                        //error reading. throw exception. TODO: throw exception
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }        
+        finally
+        {
+            
+        }
         return items;
-        	}
     }
 }

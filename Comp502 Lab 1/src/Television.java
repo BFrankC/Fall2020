@@ -84,11 +84,38 @@ public class Television extends AbstractItem
      */
     public static Television createFromString(String string) {
         Television t = new Television();
+     // Brittle.
+        String stringArray[] = string.split(":");
+        t.setId(stringArray[0]);
+        t.setDescription(stringArray[1]);
+        t.setWeeklyRate(Double.parseDouble(stringArray[2]));
+        if ( stringArray[3].compareTo("true") == 0 )
+        {
+            t.rented();
+        }
+        else if (stringArray[3].compareTo("false") == 0 )
+        {
+            t.returned();
+        }
+        else
+        {
+            //bad read.  We should thrown and exception / do something here / panic.        //TODO: Throw exception
+        }
+        t.setSize(Integer.parseInt(stringArray[4]));
+        t.setType(stringArray[5]);
         return t;
     }
 
     @Override
     public String saveToString() {
-        return null;
+        //could have just overridden the toString method.
+        //Television~345:Samsung:3.25:false:55:PLASMA
+        return "Television~"
+                + this.getId() + ":"
+                + this.getDescription() + ":"
+                + this.getWeeklyRate() + ":"
+                + this.isRented() + ":"
+                + this.getSize() + ":"
+                + this.getType();
     }
 }

@@ -45,7 +45,11 @@ public class DVDPlayer extends AbstractItem
 
     @Override
     public String saveToString() {
-        
-        return null;
+        // DVDPlayer~123:LG Player:3.25:false
+        return "DVDPlayer~" 
+                + this.getId() + ":"
+                + this.getDescription() + ":"
+                + this.getWeeklyRate() + ":"
+                + this.isRented();
     }
 }

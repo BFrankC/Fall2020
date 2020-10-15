@@ -91,12 +91,36 @@ public class Furniture extends AbstractItem
      * @return the new DVDPlayer
      */
     public static Furniture createFromString(String string) {
+        // Brittle.
         Furniture f = new Furniture();
+        String stringArray[] = string.split(":");
+        f.setId(stringArray[0]);
+        f.setDescription(stringArray[1]);
+        f.setWeeklyRate(Double.parseDouble(stringArray[2]));
+        if ( stringArray[3].compareTo("true") == 0 )
+        {
+            f.rented();
+        }
+        else if (stringArray[3].compareTo("false") == 0 )
+        {
+            f.returned();
+        }
+        else
+        {
+            //bad read.  We should thrown and exception / do something here / panic.        //TODO: Throw exception
+        }
+        f.setMonthlyRate(Double.parseDouble(stringArray[4]));
         return f;
     }
 
     @Override
     public String saveToString() {
-        return null;
+        //id:desc:weeklyRate:rented:monthlyRate
+        return "Furniture~" 
+               + this.getId() + ":"
+               + this.getDescription() + ":"
+               + this.getWeeklyRate() + ":"
+               + this.isRented() + ":"
+               + this.getMonthlyRate();
     }
 }
