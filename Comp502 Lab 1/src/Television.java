@@ -53,9 +53,17 @@ public class Television extends AbstractItem
      * parameter.
      * @param screenType the new type.
      */
-    public void setType(String screenType)
-    {
-        this.type = screenType;
+    public void setType(String screenType) throws Exception {
+        if(screenType.equals(LCD)) {
+        	this.setType(screenType);
+        }
+        else if(screenType.equals(PLASMA)) {
+        	this.setType(screenType);
+        }
+        else {
+        	throw new Exception("Invalid TV Type");
+        }
+        
     }
 
     /**
@@ -81,25 +89,29 @@ public class Television extends AbstractItem
      * id:desc:weeklyRate:rented
      * @param string The string
      * @return the new Television
+     * @throws Exception 
      */
-    public static Television createFromString(String string) {
-    	        Television newTV = new Television();
+    public static Television createFromString(String string) throws Exception {
+    	        Television t = new Television();
     	        String stringArray[] = string.split(":");
-    	        newTV.setId(stringArray[0]);
-    	        newTV.setDescription(stringArray[1]);
-    	        newTV.setWeeklyRate(stringArray[2]);
-    	        if ( stringArray[3].compareTo("true") == 0) {
-    	            newTV.rented();
+    	        t.setId(stringArray[0]);
+    	        t.setDescription(stringArray[1]);
+    	        t.setWeeklyRate(Double.parseDouble(stringArray[2]));
+    	        if (stringArray[3].compareTo("true") == 0) {
+    	            t.rented();
     	        }
     	        else if (stringArray[3].compareTo("false") == 0) {
-    	            newTV.returned();
+    	            t.returned();       
     	        }
-    	        newTV.setSize(stringArray[4]);
-    	        newTV.setType(stringArray[5]);
-    	        return newTV;
+    	        else
+    	        {
+    	        	throw new Exception("Invalid");
+    	        }
+    	        t.setSize(Integer.parseInt(stringArray[4]));
+    	        t.setType(stringArray[5]);
+    	        return t;
     	    }
 
-    }
 
     @Override
     public String saveToString() {

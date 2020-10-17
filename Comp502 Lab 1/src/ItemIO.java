@@ -1,4 +1,6 @@
+import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,9 +20,9 @@ public class ItemIO {
      */
     public static void saveItems(String filename, List<Item> items)
             throws IOException {
-    	try(PrintWriter out = new PrintWriter (new FileWriter((filename))) {
+    	try(PrintWriter out = new PrintWriter (new File((filename)))) {
     		for (Item item : items) {
-    			String line = items.toFileForma();
+    			String line = items.toFileFormat();
     			out.println(line);
     			}
     		}

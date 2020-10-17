@@ -22,13 +22,13 @@ public class DVDPlayer extends AbstractItem
      * @param string The string
      * @return the new DVDPlayer
      */
-    public static DVDPlayer createFromString(String string) {
+    public static DVDPlayer createFromString(String string) throws Exception{
         String stringArray[] = string.split(":");
         DVDPlayer player = new DVDPlayer();
         player.setId(stringArray[0]);
         player.setDescription(stringArray[1]);
-        player.setWeeklyRate(stringArray[2]);
-        if ( stringArray[3].compareTo("true") == 0 )
+        player.setWeeklyRate(Double.parseDouble(stringArray[2]));
+        if (stringArray[3].compareTo("true") == 0 )
         {
             player.rented();
         }
@@ -38,7 +38,7 @@ public class DVDPlayer extends AbstractItem
         }
         else
         {
-            //bad read.  We should thrown and exception / panic.
+            throw new Exception("Invalid");
         }
         return player;
     }
