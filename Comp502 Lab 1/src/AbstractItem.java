@@ -33,7 +33,7 @@ public abstract class AbstractItem implements Item
     @Override
     public void setDescription(String desc)
     {
-        this.description = desc; //TODO: remove
+        this.description = desc; 
     }
 
    /**
@@ -43,7 +43,7 @@ public abstract class AbstractItem implements Item
     @Override
     public double getWeeklyRate()
     {
-        return this.weeklyRate; //TODO: remove
+        return this.weeklyRate; 
     }
 
     /**
@@ -54,7 +54,7 @@ public abstract class AbstractItem implements Item
     @Override
     public void setWeeklyRate(double wklyRate)
     {
-        this.weeklyRate = wklyRate; //TODO: remove
+        this.weeklyRate = wklyRate; 
     }
 
     /**
@@ -64,7 +64,7 @@ public abstract class AbstractItem implements Item
     @Override
     public String getId()
     {
-        return this.id; //TODO: remove
+        return this.id; 
     }
 
     /**
@@ -87,7 +87,12 @@ public abstract class AbstractItem implements Item
     @Override
     public double calculateFee(int weeks)
     {
-        return this.weeklyRate * weeks; //TODO: remove
+        if(weeks >= 0) {
+        	return this.weeklyRate * weeks;
+        }
+        else { 
+        	return 0;
+        }
     }
 
     /**
