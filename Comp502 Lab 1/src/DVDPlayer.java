@@ -39,6 +39,7 @@ public class DVDPlayer extends AbstractItem
         else
         {
             //could throw exception here, but won't for tests.
+            throw new IllegalArgumentException("Bad return status");
         }        
         return player;
         

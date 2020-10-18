@@ -20,7 +20,8 @@ public class ItemIO {
      */
     public static void saveItems(String filename, List<Item> items)
             throws IOException {
-        
+            // I'm not sure why we didn't write code for this.
+            // We appear to accomplish the same task in each class.
     }
    
     
@@ -60,15 +61,7 @@ public class ItemIO {
                         //error reading. throw exception.
                 }
             }
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }        
-        finally
-        {
-            
-        }
+        }           
         return items;
     }
 }

@@ -87,148 +87,148 @@ public class LookupTest extends junit.framework.TestCase
     /**
       * Test a matching nulls.
       */
-     public void testItemNullMatch()
-     {
-         Lookup query = new ItemLookup(null);
-         assertTrue("Hint: matches() should have returned true " +
+    public void testItemNullMatch()
+    {
+        Lookup query = new ItemLookup(null);
+        assertTrue("Hint: matches() should have returned true " +
                     "when Item is null and item passed into " +
                     "ItemLookup constructor is null. ",
                     query.matches(null));
-     }
+    }
 
      /**
       * Test a matching Item.
       */
-     public void testItemMatch()
-     {
-         Item f = new Furniture();
-         Item f2 = new Furniture();
-         f.setId(IDNUM);
-         f2.setId(IDNUM);
-         Lookup query = new ItemLookup(f);
-         assertTrue("Hint: matches() should have returned true " +
+    public void testItemMatch()
+    {
+        Item f = new Furniture();
+        Item f2 = new Furniture();
+        f.setId(IDNUM);
+        f2.setId(IDNUM);
+        Lookup query = new ItemLookup(f);
+        assertTrue("Hint: matches() should have returned true " +
                     "when item matches the item passed into " +
                     "IdLookup constructor. ",
                     query.matches(f2));
-     }
+    }
 
      /**
       * Test when lookup item not set.
       */
-     public void testItemNoMatchToNull()
-     {
-         Item dvd = new DVDPlayer();
-         dvd.setId(IDNUM);
-         Lookup query = new ItemLookup(null);
-         assertFalse("Hint: matches() should have returned false " +
+    public void testItemNoMatchToNull()
+    {
+        Item dvd = new DVDPlayer();
+        dvd.setId(IDNUM);
+        Lookup query = new ItemLookup(null);
+        assertFalse("Hint: matches() should have returned false " +
                     "when item passed into ItemLookup constructor is " +
                     "null and item is not null. ",
                      query.matches(dvd));
-     }
+    }
 
      /**
       * Test when item id not set.
       */
-     public void testItemNoMatchToItemNull()
-     {
-         Item dvd = new DVDPlayer();
-         Lookup query = new ItemLookup(dvd);
-         assertFalse("Hint: matches() should have returned false " +
+    public void testItemNoMatchToItemNull()
+    {
+        Item dvd = new DVDPlayer();
+        Lookup query = new ItemLookup(dvd);
+        assertFalse("Hint: matches() should have returned false " +
                     "when Item is null and item passed into ItemLookup " +
                     "constructor is not null. ",
                      query.matches(null));
-     }
+    }
 
      /**
       * Test non-matching Item types.
       */
-     public void testItemNoMatchId()
-     {
-         Item tv = new Television();
-         Item tv2 = new Television();
-         tv.setId(IDNUM);
-         tv2.setId(IDNUM2);
-         Lookup query = new ItemLookup(tv);
-         assertFalse("Hint: matches() should have returned false " +
+    public void testItemNoMatchId()
+    {
+        Item tv = new Television();
+        Item tv2 = new Television();
+        tv.setId(IDNUM);
+        tv2.setId(IDNUM2);
+        Lookup query = new ItemLookup(tv);
+        assertFalse("Hint: matches() should have returned false " +
                     "when item passed into ItemLookup constructor " +
                     "does not match Item. ",
                      query.matches(tv2));
-     }
+    }
 
      /**
       * Test a matching Item.
       */
-     public void testTVMatch()
-     {
-         Television tv = new Television();
-         tv.setType(PLASMA);
-         tv.setSize(SIZE_40);
-         Lookup query = new TVLookup(SIZE_40, PLASMA);
-         assertTrue("Hint: matches() should have returned true " +
+    public void testTVMatch()
+    {
+        Television tv = new Television();
+        tv.setType(PLASMA);
+        tv.setSize(SIZE_40);
+        Lookup query = new TVLookup(SIZE_40, PLASMA);
+        assertTrue("Hint: matches() should have returned true " +
                     "when size and type of the item matches " +
                     "the size and type passed into " +
                     "TVLookup constructor. ",
                     query.matches(tv));
-     }
+    }
 
 
      /**
       * Test a matching Item with null type.
       */
-     public void testTVMatchNull()
-     {
-         Television tv = new Television();
-         tv.setSize(SIZE_40);
-         Lookup query = new TVLookup(SIZE_40, null);
-         assertTrue("Hint: matches() should have returned true " +
+    public void testTVMatchNull()
+    {
+        Television tv = new Television();
+        tv.setSize(SIZE_40);
+        Lookup query = new TVLookup(SIZE_40, null);
+        assertTrue("Hint: matches() should have returned true " +
                     "when sizes match and types are both null",
                     query.matches(tv));
-     }
+    }
 
      /**
       * Test when lookup type not set.
       */
-     public void testTVNoMatchToNull()
-     {
-         Television tv = new Television();
-         tv.setType(PLASMA);
-         tv.setSize(SIZE_40);
-         Lookup query = new TVLookup(SIZE_40, null);
-         assertFalse("Hint: matches() should have returned false " +
+    public void testTVNoMatchToNull()
+    {
+        Television tv = new Television();
+        tv.setType(PLASMA);
+        tv.setSize(SIZE_40);
+        Lookup query = new TVLookup(SIZE_40, null);
+        assertFalse("Hint: matches() should have returned false " +
                     "when type passed into TVLookup constructor is " +
                     "null and type is set. ",
                      query.matches(tv));
-     }
+    }
 
      /**
       * Test when type not set.
       */
-     public void testTVNoMatchToItemNull()
-     {
-         Television tv = new Television();
-         tv.setSize(SIZE_40);
-         Lookup query = new TVLookup(SIZE_40, PLASMA);
-         assertFalse("Hint: matches() should have returned false " +
+    public void testTVNoMatchToItemNull()
+    {
+        Television tv = new Television();
+        tv.setSize(SIZE_40);
+        Lookup query = new TVLookup(SIZE_40, PLASMA);
+        assertFalse("Hint: matches() should have returned false " +
                     "when type is null and id passed into TVLookup " +
                     "constructor is not null. ",
                      query.matches(tv));
-     }
+    }
 
      /**
       * Test when types or sizes don't match.
       */
-     public void testTVNoMatch()
-     {
-         Television tv = new Television();
-         tv.setSize(SIZE_40);
-         tv.setType(PLASMA);
-         Lookup query = new TVLookup(SIZE_40, LCD);
-         assertFalse("Hint: matches() should have returned false " +
+    public void testTVNoMatch()
+    {
+        Television tv = new Television();
+        tv.setSize(SIZE_40);
+        tv.setType(PLASMA);
+        Lookup query = new TVLookup(SIZE_40, LCD);
+        assertFalse("Hint: matches() should have returned false " +
                     "when types don't match. ",
                      query.matches(tv));
-         query = new TVLookup(SIZE_45, PLASMA);
-         assertFalse("Hint: matches() should have returned false " +
+        query = new TVLookup(SIZE_45, PLASMA);
+        assertFalse("Hint: matches() should have returned false " +
                     "when sizes don't match. ",
                      query.matches(tv));
-     }
- }
+    }
+}

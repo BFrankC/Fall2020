@@ -558,6 +558,9 @@ public class ABCRentalsTest extends junit.framework.TestCase
                    inventory.restock(tv.getId()));
     }
 
+    /**
+     * testOldStuff: A test of antiques.
+     */
     public void testOldStuff() {
         oldTestAddItem();
         inventory = new ABCRentals();

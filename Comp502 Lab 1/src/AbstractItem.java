@@ -129,6 +129,8 @@ public abstract class AbstractItem implements Item
                     return false;
                 case '0':
                     break;
+                default:
+                    return false;
             }
         }
         return true;
