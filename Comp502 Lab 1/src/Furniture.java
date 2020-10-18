@@ -34,8 +34,11 @@ public class Furniture extends AbstractItem
      */
     public void setMonthlyRate(double mnthlyRate)
     {
-        this.monthlyRate = mnthlyRate;
-    }
+    	if(mnthlyRate < 0) {
+    		throw new IllegalArgumentException("Dollar amount is zero");
+    	}
+    		this.monthlyRate = mnthlyRate;	
+    	}
 
     /**
      * Calculate the fees for renting the furniture for a given
@@ -55,15 +58,16 @@ public class Furniture extends AbstractItem
         {
             return 0;
         }
-        
-        if(weeks >4)
+        if (weeks == 4) {
+        	return monthlyRate;
+        }
+        else if(weeks > 4)
         {
-            return monthlyRate * Math.floor(weeks/4) + getWeeklyRate()*(weeks % 4);
+            return monthlyRate * Math.floor(weeks/4.0) + getWeeklyRate()*(weeks % 4);
         }
         else
         {
             return weeks * getWeeklyRate(); 
-            
         }
     }
 

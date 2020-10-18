@@ -39,8 +39,9 @@ public class DVDPlayer extends AbstractItem
         else
         {
             //could throw exception here, but won't for tests.
-        }
+        }        
         return player;
+        
     }
 
     @Override
