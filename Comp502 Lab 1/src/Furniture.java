@@ -34,17 +34,17 @@ public class Furniture extends AbstractItem
      */
     public void setMonthlyRate(double mnthlyRate)
     {
-    	if(mnthlyRate < 0) {
-    		throw new IllegalArgumentException("Dollar amount is < zero");
-    	}
-    	else if(mnthlyRate == 0)
-    	{
-    	    throw new IllegalArgumentException("Dollar amount is zero");
-    	}
-    	else
-    	{
-    		this.monthlyRate = mnthlyRate;	
-    	}
+        if (mnthlyRate < 0) {
+            throw new IllegalArgumentException("Dollar amount is < zero");
+        }
+        else if (mnthlyRate == 0)
+        {
+            throw new IllegalArgumentException("Dollar amount is zero");
+        }
+        else
+        {
+            this.monthlyRate = mnthlyRate;
+        }
     }
 
     /**
@@ -61,16 +61,17 @@ public class Furniture extends AbstractItem
     @Override
     public double calculateFee(int weeks)
     {
-        if (monthlyRate <=0 || weeks <= 0 || getWeeklyRate() <= 0)
+        if (monthlyRate <= 0 || weeks <= 0 || getWeeklyRate() <= 0)
         {
             return 0;
         }
         if (weeks == 4) {
-        	return monthlyRate;
+            return monthlyRate;
         }
-        else if(weeks > 4)
+        else if (weeks > 4)
         {
-            return monthlyRate * Math.floor(weeks/4.0) + getWeeklyRate()*(weeks % 4);
+            return monthlyRate * Math.floor(weeks / 4.0) 
+                   + getWeeklyRate() * (weeks % 4);
         }
         else
         {
@@ -104,7 +105,7 @@ public class Furniture extends AbstractItem
     public static Furniture createFromString(String string) {
         // Brittle.
         Furniture f = new Furniture();
-        String stringArray[] = string.split(":");
+        String[] stringArray = string.split(":");
         f.setId(stringArray[0]);
         f.setDescription(stringArray[1]);
         f.setWeeklyRate(Double.parseDouble(stringArray[2]));
@@ -118,7 +119,7 @@ public class Furniture extends AbstractItem
         }
         else
         {
-            //bad read.  We should thrown and exception / do something here / panic.        //TODO: Throw exception
+            throw new IllegalArgumentException("bad value for rental status");
         }
         f.setMonthlyRate(Double.parseDouble(stringArray[4]));
         return f;

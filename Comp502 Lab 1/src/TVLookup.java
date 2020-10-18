@@ -37,32 +37,25 @@ public class TVLookup implements Lookup
         try
         {
         // WE DONT KNOW THAT ITEM IS A TV!
-        Television tv = (Television)item;
-        if (tv == null)
-        {
-            //PROBLEM WITH CAST!
-            return false;
-        }
-        if (tvSize == tv.getSize())
-        {
-
-            if(tv.getType() == null && tvType == null)
+            Television tv = (Television)item;
+            if (tv == null)
             {
-                return true;
+                //PROBLEM WITH CAST!
+                return false;
             }
-            else if (tvType.equalsIgnoreCase(tv.getType()))
+            if (tvSize == tv.getSize())
             {
-                return true;
+    
+                if (tv.getType() == null && tvType == null)
+                {
+                    return true;
+                }
+                return tvType.equalsIgnoreCase(tv.getType());
             }
-            else
+            else 
             {
                 return false;
             }
-        }
-        else 
-        {
-            return false;
-        }
         }
         catch (Exception e)
         {

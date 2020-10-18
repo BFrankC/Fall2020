@@ -97,7 +97,7 @@ public class ABCRentals implements Inventory
     {
         ArrayList<Item> matches = new ArrayList<Item>();
         // The worst way to do this.  
-        for(Item x: items)
+        for (Item x: items)
         {
             if (query.matches(x))
             {

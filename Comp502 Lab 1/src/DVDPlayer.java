@@ -22,8 +22,8 @@ public class DVDPlayer extends AbstractItem
      * @param string The string
      * @return the new DVDPlayer
      */
-    public static DVDPlayer createFromString(String string){
-        String stringArray[] = string.split(":");
+    public static DVDPlayer createFromString(String string) {
+        String[] stringArray = string.split(":");
         DVDPlayer player = new DVDPlayer();
         player.setId(stringArray[0]);
         player.setDescription(stringArray[1]);

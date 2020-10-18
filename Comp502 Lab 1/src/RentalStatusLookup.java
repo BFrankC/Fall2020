@@ -32,11 +32,11 @@ public class RentalStatusLookup implements Lookup
     {
         try
         {
-        if (item == null)
-        {
-            return false;
-        }
-        return lookupStatus == item.isRented();
+            if (item == null)
+            {
+                return false;
+            }
+            return lookupStatus == item.isRented();
         }
         catch (Exception e)
         {

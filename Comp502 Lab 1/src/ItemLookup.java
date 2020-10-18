@@ -32,25 +32,17 @@ public class ItemLookup implements Lookup
     {
         try
         {
-        if (item == null && theItem == null)
-        {
-            return true;
-        }
+            if (item == null && theItem == null)
+            {
+                return true;
+            }
         // ^ is exclusive or.  it means only one is true.
-        else if (item == null ^ theItem == null)
-        {
-            return false;
-        }
-        // So, they both have a value, do they match?
-        else if (theItem.equals(item))
-        {
-            return true;
-        }
-        //No match.
-        else
-        {
-            return false;
-        }
+            else if (item == null ^ theItem == null)
+            {
+                return false;
+            }
+            // So, they both have a value, do they match?
+            return theItem.equals(item);
         }
         catch (Exception e)
         {

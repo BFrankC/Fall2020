@@ -1,7 +1,5 @@
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
-import java.nio.CharBuffer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -22,13 +20,8 @@ public class ItemIO {
      */
     public static void saveItems(String filename, List<Item> items)
             throws IOException {
-//    	try(PrintWriter out = new PrintWriter (new FileWriter((filename))) {
-//    		for (Item item : items) {
-//    			String line = items.toFileForma();
-//    			out.println(line);
-//    			}
-//    		}
-    	}
+        
+    }
    
     
 
@@ -42,9 +35,9 @@ public class ItemIO {
      */
     public static List<Item> loadItems(String filename) throws IOException {
         ArrayList<Item> items = new ArrayList<>();
-        try(Scanner input = new Scanner(new File(filename)))
+        try (Scanner input = new Scanner(new File(filename)))
         {
-            while(input.hasNext())
+            while (input.hasNext())
             {
                 input.useDelimiter("~");
                 String type = input.next();
@@ -52,17 +45,19 @@ public class ItemIO {
                 
                 switch(type)
                 {
-                case "DVDPlayer":
-                    items.add(DVDPlayer.createFromString(input.nextLine()));
-                    break;
-                case "Furniture":
-                    items.add(Furniture.createFromString(input.nextLine()));
-                    break;
-                case "Television":
-                    items.add(Television.createFromString(input.nextLine()));
-                    break;
+                    case "DVDPlayer":
+                        items.add(DVDPlayer.createFromString(input.nextLine()));
+                        break;
+                    case "Furniture":
+                        items.add(Furniture.createFromString(input.nextLine()));
+                        break;
+                    case "Television":
+                        items.add(Television.createFromString(
+                                input.nextLine()));   
+                        // Line character limits are an obsolete practice.
+                        break;
                     default:
-                        //error reading. throw exception. TODO: throw exception
+                        //error reading. throw exception.
                 }
             }
         }

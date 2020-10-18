@@ -8,12 +8,12 @@ public class Television extends AbstractItem
 {
     private static final String PLASMA = "plasma";
     private static final String LCD = "lcd";
-    private int PLASMA_MIN_SIZE = 32;
+    private final int plasmaMinSize = 32;
     // PLAZA_MAX
-    private int LCD_MAX_SIZE = 50;
+    private final int lcdMaxSize = 50;
     // LCD_MIN
-    private int TV_MIN_SIZE = 5;
-    private int TV_MAX_SIZE = 60;
+    private final int tvMinSize = 5;
+    private final int tvMaxSize = 60;
 
     private int size;
     private String type;
@@ -42,23 +42,24 @@ public class Television extends AbstractItem
      */
     public void setSize(int screenSize)
     {
-        if (screenSize < TV_MIN_SIZE)
+        if (screenSize < tvMinSize)
         {
             throw new IllegalArgumentException("Error: TV Size too small");
         }
-        else if (screenSize > TV_MAX_SIZE)
+        else if (screenSize > tvMaxSize)
         {
-            throw new IllegalArgumentException("Error: TV Size too small");            
+            throw new IllegalArgumentException("TV Size too small");            
         }
         else if (this.type != null)
         {
-            if (this.type.equalsIgnoreCase(LCD) && screenSize > LCD_MAX_SIZE)
+            if (this.type.equalsIgnoreCase(LCD) && screenSize > lcdMaxSize)
             {
-                throw new IllegalArgumentException("Error: TV Size too small for LCD"); 
+                throw new IllegalArgumentException("Size too small for LCD"); 
             }
-            else if (this.type.equalsIgnoreCase(PLASMA) && screenSize < PLASMA_MIN_SIZE)
+            else if (this.type.equalsIgnoreCase(PLASMA) 
+                     && screenSize < plasmaMinSize)
             {
-                throw new IllegalArgumentException("Error: TV Size too small for PLASMA"); 
+                throw new IllegalArgumentException("Plasma size too small."); 
             }
             else {
                 this.size = screenSize;
@@ -86,27 +87,30 @@ public class Television extends AbstractItem
      */
     public void setType(String screenType)
     {
-        if(screenType == null)
+        if (screenType == null)
         {
-            throw new IllegalArgumentException("Error: bad argument for TV Type");
+            throw new IllegalArgumentException("Bad argument for TV Type");
         }
-        if(this.size < PLASMA_MIN_SIZE && screenType.equalsIgnoreCase(PLASMA) && this.size != 0)
-        {
-            // only throw if the size has already been set.
-            throw new IllegalArgumentException("Error: bad argument for TV Type");
-        }
-        if (this.size > LCD_MAX_SIZE && screenType.equalsIgnoreCase(LCD) && this.size != 0)
+        if (this.size < plasmaMinSize 
+            && screenType.equalsIgnoreCase(PLASMA) && this.size != 0)
         {
             // only throw if the size has already been set.
-            throw new IllegalArgumentException("Error: bad argument for TV Type");
+            throw new IllegalArgumentException("Bad argument for TV Type");
         }
-        if (screenType.equalsIgnoreCase(PLASMA) || screenType.equalsIgnoreCase(LCD))
+        if (this.size > lcdMaxSize 
+            && screenType.equalsIgnoreCase(LCD) && this.size != 0)
+        {
+            // only throw if the size has already been set.
+            throw new IllegalArgumentException("Bad argument for TV Type");
+        }
+        if (screenType.equalsIgnoreCase(PLASMA) 
+                || screenType.equalsIgnoreCase(LCD))
         {
             this.type = screenType;
         }
         else
         {
-            throw new IllegalArgumentException("Error: bad argument for TV Type");
+            throw new IllegalArgumentException("Bad argument for TV Type");
         }
     }
 
@@ -136,23 +140,23 @@ public class Television extends AbstractItem
      */
     public static Television createFromString(String string) {
         Television t = new Television();
-    	        String stringArray[] = string.split(":");
-    	        t.setId(stringArray[0]);
-    	        t.setDescription(stringArray[1]);
-    	        t.setWeeklyRate(Double.parseDouble(stringArray[2]));
-    	        if (stringArray[3].compareTo("true") == 0) {
-    	            t.rented();
-    	        }
-    	        else if (stringArray[3].compareTo("false") == 0) {
-    	            t.returned();       
-    	        }
-    	        else
-    	        {
-    	            //coud throw here, but wont because tests don't expect it.
-    	        }
-    	        t.setSize(Integer.parseInt(stringArray[4]));
-    	        t.setType(stringArray[5]);
-    	        return t;
+        String[] stringArray = string.split(":");
+        t.setId(stringArray[0]);
+        t.setDescription(stringArray[1]);
+        t.setWeeklyRate(Double.parseDouble(stringArray[2]));
+        if (stringArray[3].compareTo("true") == 0) {
+            t.rented();
+        }
+        else if (stringArray[3].compareTo("false") == 0) {
+            t.returned();       
+        }
+        else
+        {
+            throw new IllegalArgumentException("Invalid rental status");
+        }
+        t.setSize(Integer.parseInt(stringArray[4]));
+        t.setType(stringArray[5]);
+        return t;
     }
 
     @Override

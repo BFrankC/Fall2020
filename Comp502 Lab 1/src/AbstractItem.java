@@ -22,7 +22,7 @@ public abstract class AbstractItem implements Item
     @Override
     public String getDescription()
     {
-        return this.description;    //TODO: remove
+        return this.description;
     }
 
     /**
@@ -33,13 +33,13 @@ public abstract class AbstractItem implements Item
     @Override
     public void setDescription(String desc)
     {
-        if(desc == null)
+        if (desc == null)
         {
-            throw new IllegalArgumentException("ERROR SetDescription: null argument");
+            throw new IllegalArgumentException("SetDescription:null arg");
         }
         else if (desc.contentEquals(""))
         {
-            throw new IllegalArgumentException("ERROR SetDescription: empty argument");
+            throw new IllegalArgumentException("SetDescription: empty arg");
         }
         this.description = desc; 
     }
@@ -62,13 +62,13 @@ public abstract class AbstractItem implements Item
     @Override
     public void setWeeklyRate(double wklyRate)
     {
-        if(wklyRate < 0)
+        if (wklyRate < 0)
         {
-            throw new IllegalArgumentException("ERROR: attempt to set weekly rate negative");
+            throw new IllegalArgumentException("Setting wklyRate negative");
         }
         else if (wklyRate == 0)
         {
-            throw new IllegalArgumentException("ERROR: attempt to set weekly rate to 0");
+            throw new IllegalArgumentException("Setting wklyRate to 0");
         }
         this.weeklyRate = wklyRate; 
     }
@@ -93,26 +93,32 @@ public abstract class AbstractItem implements Item
     {
         if (idNum == null)
         {
-            throw new IllegalArgumentException("ERROR: attempt to set idNum null");
+            throw new IllegalArgumentException("Attempt to set idNum null");
         }
-        else if (idNum == "")
+        else if (idNum.equals(""))
         {
-            throw new IllegalArgumentException("ERROR: attempt to set idNum empty");
+            throw new IllegalArgumentException("Attempt to set idNum empty");
         }
-        else if (idNum.charAt(0)== '-')
+        else if (idNum.charAt(0) == '-')
         {
-            throw new IllegalArgumentException("ERROR: attempt to set idNum negative");
+            throw new IllegalArgumentException("Attempt to set idNum negative");
         }
         else if (isNumericStringZero(idNum))
         {
-            throw new IllegalArgumentException("ERROR: attempt to set idNum to 0");
+            throw new IllegalArgumentException("Attempt to set idNum to 0");
         }
-        this.id = idNum;    //TODO: remove
+        this.id = idNum;
     }
     
+    /**
+     * check if a string containing only number is equivalent to 0
+     * parameter.
+     * @param s the new string being tested.
+     * @return true if string equates to 0, false otherwise.
+     */
     public boolean isNumericStringZero(String s)
     {
-        for(char c : s.toCharArray())
+        for (char c : s.toCharArray())
         {
             switch(c)
             {
@@ -137,11 +143,11 @@ public abstract class AbstractItem implements Item
     @Override
     public double calculateFee(int weeks)
     {
-        if(weeks >= 0) {
-        	return this.weeklyRate * weeks;
+        if (weeks >= 0) {
+            return this.weeklyRate * weeks;
         }
         else { 
-        	return 0;
+            return 0;
         }
     }
 
@@ -151,7 +157,7 @@ public abstract class AbstractItem implements Item
     @Override
     public void rented()
     {
-        this.isRentedOut = true;    //TODO: remove
+        this.isRentedOut = true;
     }
 
     /**
@@ -161,7 +167,7 @@ public abstract class AbstractItem implements Item
     @Override
     public void returned()
     {
-        this.isRentedOut = false;    //TODO: remove
+        this.isRentedOut = false;
     }
 
     /**
@@ -171,7 +177,7 @@ public abstract class AbstractItem implements Item
     @Override
     public boolean isRented()
     {
-        return this.isRentedOut;    //TODO: remove
+        return this.isRentedOut;
     }
 
     /**
