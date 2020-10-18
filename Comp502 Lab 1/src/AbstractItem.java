@@ -33,6 +33,14 @@ public abstract class AbstractItem implements Item
     @Override
     public void setDescription(String desc)
     {
+        if(desc == null)
+        {
+            throw new IllegalArgumentException("ERROR SetDescription: null argument");
+        }
+        else if (desc.contentEquals(""))
+        {
+            throw new IllegalArgumentException("ERROR SetDescription: empty argument");
+        }
         this.description = desc; 
     }
 
@@ -54,6 +62,14 @@ public abstract class AbstractItem implements Item
     @Override
     public void setWeeklyRate(double wklyRate)
     {
+        if(wklyRate < 0)
+        {
+            throw new IllegalArgumentException("ERROR: attempt to set weekly rate negative");
+        }
+        else if (wklyRate == 0)
+        {
+            throw new IllegalArgumentException("ERROR: attempt to set weekly rate to 0");
+        }
         this.weeklyRate = wklyRate; 
     }
 
@@ -75,7 +91,41 @@ public abstract class AbstractItem implements Item
     @Override
     public void setId(String idNum)
     {
+        if (idNum == null)
+        {
+            throw new IllegalArgumentException("ERROR: attempt to set idNum null");
+        }
+        else if (idNum == "")
+        {
+            throw new IllegalArgumentException("ERROR: attempt to set idNum empty");
+        }
+        else if (idNum.charAt(0)== '-')
+        {
+            throw new IllegalArgumentException("ERROR: attempt to set idNum negative");
+        }
+        else if (isNumericStringZero(idNum))
+        {
+            throw new IllegalArgumentException("ERROR: attempt to set idNum to 0");
+        }
         this.id = idNum;    //TODO: remove
+    }
+    
+    public boolean isNumericStringZero(String s)
+    {
+        for(char c : s.toCharArray())
+        {
+            switch(c)
+            {
+                case'-':
+                    return false; //negative zero is not a thing here.
+                case '1': case '2': case '3': case '4': case'5':
+                case '6': case '7': case '8': case '9':
+                    return false;
+                case '0':
+                    break;
+            }
+        }
+        return true;
     }
 
     /**

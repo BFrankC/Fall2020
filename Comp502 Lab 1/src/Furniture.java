@@ -35,10 +35,17 @@ public class Furniture extends AbstractItem
     public void setMonthlyRate(double mnthlyRate)
     {
     	if(mnthlyRate < 0) {
-    		throw new IllegalArgumentException("Dollar amount is zero");
+    		throw new IllegalArgumentException("Dollar amount is < zero");
     	}
+    	else if(mnthlyRate == 0)
+    	{
+    	    throw new IllegalArgumentException("Dollar amount is zero");
+    	}
+    	else
+    	{
     		this.monthlyRate = mnthlyRate;	
     	}
+    }
 
     /**
      * Calculate the fees for renting the furniture for a given

@@ -8,6 +8,12 @@ public class Television extends AbstractItem
 {
     private static final String PLASMA = "plasma";
     private static final String LCD = "lcd";
+    private int PLASMA_MIN_SIZE = 32;
+    // PLAZA_MAX
+    private int LCD_MAX_SIZE = 50;
+    // LCD_MIN
+    private int TV_MIN_SIZE = 5;
+    private int TV_MAX_SIZE = 60;
 
     private int size;
     private String type;
@@ -36,7 +42,32 @@ public class Television extends AbstractItem
      */
     public void setSize(int screenSize)
     {
-        this.size = screenSize;
+        if (screenSize < TV_MIN_SIZE)
+        {
+            throw new IllegalArgumentException("Error: TV Size too small");
+        }
+        else if (screenSize > TV_MAX_SIZE)
+        {
+            throw new IllegalArgumentException("Error: TV Size too small");            
+        }
+        else if (this.type != null)
+        {
+            if (this.type.equalsIgnoreCase(LCD) && screenSize > LCD_MAX_SIZE)
+            {
+                throw new IllegalArgumentException("Error: TV Size too small for LCD"); 
+            }
+            else if (this.type.equalsIgnoreCase(PLASMA) && screenSize < PLASMA_MIN_SIZE)
+            {
+                throw new IllegalArgumentException("Error: TV Size too small for PLASMA"); 
+            }
+            else {
+                this.size = screenSize;
+            }
+        }
+        else 
+        {
+            this.size = screenSize;
+        }
     }
 
     /**
@@ -55,7 +86,28 @@ public class Television extends AbstractItem
      */
     public void setType(String screenType)
     {
-        this.type = screenType;
+        if(screenType == null)
+        {
+            throw new IllegalArgumentException("Error: bad argument for TV Type");
+        }
+        if(this.size < PLASMA_MIN_SIZE && screenType.equalsIgnoreCase(PLASMA) && this.size != 0)
+        {
+            // only throw if the size has already been set.
+            throw new IllegalArgumentException("Error: bad argument for TV Type");
+        }
+        if (this.size > LCD_MAX_SIZE && screenType.equalsIgnoreCase(LCD) && this.size != 0)
+        {
+            // only throw if the size has already been set.
+            throw new IllegalArgumentException("Error: bad argument for TV Type");
+        }
+        if (screenType.equalsIgnoreCase(PLASMA) || screenType.equalsIgnoreCase(LCD))
+        {
+            this.type = screenType;
+        }
+        else
+        {
+            throw new IllegalArgumentException("Error: bad argument for TV Type");
+        }
     }
 
     /**
